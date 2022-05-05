@@ -34,6 +34,6 @@ SCREEN = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
 
 CAR = pygame.image.load(
-    os.path.join("/random car/imgs", "car5.png"))
+    os.path.join("/Users/ahmedyamany/PycharmProjects/self-driving-car/imgs", "car5.png"))
 
 CAR = pygame.transform.scale(CAR, (54, 37))  # change car size by the distinations
