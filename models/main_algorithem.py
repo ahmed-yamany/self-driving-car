@@ -54,7 +54,7 @@ def fittness_function(genomes, config):
 
     # LOADING SAVED GENOME
 
-    # file = open("winner.p",'rb')
+    # file = open("WinnerCar.pickle",'rb')
     # winner_genome = pickle.load(file)
     # file.close()
     #
@@ -95,13 +95,12 @@ def fittness_function(genomes, config):
 
         # if len(cars) == 1:
         #     # print(ge[0].fitness)
-        #     with open("Winner.p", "wb") as f:
+        #     with open("WinnerCar.pickle", "wb") as f:
         #         pickle.dump(genomes[0], f)
         #         f.close()
 
         if len(cars) == 0:
             SCORES.append(shifts)
-            # print("fin")
             # print(SCORES)
             break
 
@@ -117,7 +116,10 @@ def fittness_function(genomes, config):
                 # car.sprite.crashed = False
 
         for i, car in enumerate(cars):
-            output = nets[i].activate(car.sprite.data())
+
+            car_output = car.sprite.data()
+
+            output = nets[i].activate(car_output)
             if output[0] > 0.7:
                 car.sprite.command[0] = 1
                 car.sprite.command[3] = 0
@@ -146,7 +148,6 @@ def fittness_function(genomes, config):
 
         if next_lane:
             next_lane = False
-            # print("ole")
             trak.shift()
             for i, car in enumerate(cars):
                 car.sprite.shift()
@@ -156,6 +157,7 @@ def fittness_function(genomes, config):
 
         for i in range(len(trak.points)):
             trak.draw(i)
+
 
         for car in cars:
             car.sprite.rot_center()

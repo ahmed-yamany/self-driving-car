@@ -2,7 +2,7 @@ import pygame
 import os
 import random
 from models.statics import (
-    TRACK_WIDTH, SCREEN_HEIGHT, GREEN
+    TRACK_WIDTH, SCREEN_HEIGHT, GREEN, YELLOW
 )
 
 
@@ -33,6 +33,10 @@ class Road:
 
     def draw(self, i):
         if i > 0:
+            # pygame.draw.line(self.SCREEN, YELLOW,
+            #                  (self.points[i][0], self.points[i][1] + TRACK_WIDTH),
+            #                  (self.points[i][0], self.points[i][1] - TRACK_WIDTH), TRACK_WIDTH+400)
+
             pygame.draw.line(self.SCREEN, GREEN,
                              (self.points[i - 1][0], self.points[i - 1][1] + TRACK_WIDTH),
                              (self.points[i][0], self.points[i][1] + TRACK_WIDTH), 22)
@@ -40,6 +44,9 @@ class Road:
             pygame.draw.line(self.SCREEN, GREEN,
                              (self.points[i - 1][0], self.points[i - 1][1] - TRACK_WIDTH),
                              (self.points[i][0], self.points[i][1] - TRACK_WIDTH), 22)
+
+
+
 
     def shift(self):
         for h in range(5):

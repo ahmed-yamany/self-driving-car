@@ -5,8 +5,7 @@ import math
 import numpy as np
 
 from models.statics import (
-    SCREEN_WIDTH, SCREEN_HEIGHT, TRACK_WIDTH,
-    CAR, MAX_VELOCITY, GREEN, WHITE, FUCSIA
+     SCREEN_HEIGHT, CAR, MAX_VELOCITY, GREEN, WHITE
 )
 
 
@@ -178,6 +177,7 @@ class Car(pygame.sprite.Sprite):
 
         dist = int(math.sqrt(math.pow(self.rect.center[0] - x, 2)
                              + math.pow(self.rect.center[1] - y, 2)))
+        # dist = sqrt(x^2 + Y^2)
 
         self.radars.append([radar_angle, dist])
 
@@ -218,13 +218,10 @@ class Car(pygame.sprite.Sprite):
     def data(self):
         input = [0, 0, 0, 0, 0, 0]
         for i, radar in enumerate(self.radars):
-            input[i] = int(radar[1])
+            distance = int(radar[1])
+            input[i] = distance
 
-        input[5] = 0
-        if input[5] == 1:
-            pass
-            # pygame.draw.circle(SCREEN, (0, 0, 0, 0), (self.rect.centerx, 50), 3)
+        # input[5] = 0
         if input[5] == 0:
-            pass
-            # pygame.draw.circle(SCREEN, (0, 255, 255, 0), (self.rect.centerx, 50), 3)
+            pygame.draw.circle(self.SCREEN, (0, 255, 255, 0), (self.rect.centerx, 50), 3)
         return input
