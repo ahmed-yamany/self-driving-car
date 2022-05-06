@@ -31,15 +31,12 @@ def eval_genomes(genomes, config):
 
     shifts = 0
 
-    global traf_l_pos
-    traf_l_pos = 0
-
     cars = []
     ge = []
     nets = []
     SCREEN.fill(GRAY)
 
-    trak = Road.Road(SCREEN=SCREEN)
+    trak = Road.Road()
 
     check = 0
     next_lane = False
@@ -48,14 +45,8 @@ def eval_genomes(genomes, config):
 
     trak.points[5] = (trak.points[5][0], trak.points[5][1], 1)
 
-    # LOADING SAVED GENOME!
-    # file = open("winner.p",'rb')
-    # winner_genome = pickle.load(file)
-    # file.close()
-
     for genome_id, genome in genomes:
         car_object = Car(SCREEN=SCREEN)
-        car_object.traf_l_pos = 2000
 
         cars.append(pygame.sprite.GroupSingle(car_object))
         ge.append(genome)
@@ -64,6 +55,11 @@ def eval_genomes(genomes, config):
         genome.fitness = 0
 
     # LOADING SAVED GENOME
+
+    # file = open("winner.p",'rb')
+    # winner_genome = pickle.load(file)
+    # file.close()
+
     # cars.append(pygame.sprite.GroupSingle(Car(SCREEN)))
     # ge.append(winner_genome[1])
     # net = neat.nn.FeedForwardNetwork.create(winner_genome[1], config)
@@ -87,27 +83,12 @@ def eval_genomes(genomes, config):
         # SCREEN.blit(text_3, (50, 510))
 
     time = 0
-    # command = [0,0,0,0]
-    run = True
-    # command = [0,0,0,0]
-    countdown = False
-    redlight_time = 0
+
+
     while True:
         time += 1
-        # print(mycar.x_velocity)
+
         SCREEN.fill(GRAY)
-        # print(traf_l_pos)
-        if countdown:
-            redlight_time += 1
-        if redlight_time > 500:
-            countdown = False
-            redlight_time = 0
-            for i in range(10):
-                if trak.points[i][2] == 1:
-                    # trak.points[i][2] = 2
-                    trak.change_traf(i)
-                    # print("GREEN LIGHT!")
-                    break
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -128,18 +109,10 @@ def eval_genomes(genomes, config):
 
         for i, car in enumerate(cars):
 
-            if (traf_l_pos - car.sprite.rect.centerx) < 200 and ((traf_l_pos - car.sprite.rect.centerx) > 0):
-
-                ge[i].fitness -= fit * car.sprite.x_velocity * 0.1
-                if car.sprite.x_velocity <= 1:
-                    # pygame.draw.circle(SCREEN, (255,80,100,100), (car.sprite.rect.centerx, 690), 2)
-                    ge[i].fitness += fit
-            elif car.sprite.x_velocity > 1:
-                ge[i].fitness += fit
-
+            # if car.sprite.x_velocity > 1:
+            #     ge[i].fitness += fit
+            #
             if car.sprite.crashed:
-                # ge[i].fitness -= 0.5
-
                 remove(i)
 
             if car.sprite.rect.x >= 1100:

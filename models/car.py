@@ -6,7 +6,7 @@ import numpy as np
 
 from models.statics import (
     SCREEN_WIDTH, SCREEN_HEIGHT, TRACK_WIDTH,
-    TRAF_WIDTH, CAR, MAX_VELOCITY, GREEN, WHITE, FUCSIA
+    CAR, MAX_VELOCITY, GREEN, WHITE, FUCSIA
 )
 
 
@@ -79,16 +79,6 @@ class Car(pygame.sprite.Sprite):
             self.right_sensor = [self.rect.x + self.image_height * math.sin(np.radians(self.body_orientation)),
                                  self.rect.y]
 
-        # pygame.draw.line(self.SCREEN, GREEN, self.left_sensor, (500,300))
-
-        # pygame.draw.circle(self.SCREEN, FUCSIA, self.left_sensor, 1)
-        # pygame.draw.circle(self.SCREEN, FUCSIA, self.right_sensor, 1)
-
-        # self.know = [self.rect.x, self.rect.y]
-        # self.know2 = [self.rect.x + self.image.get_width(), self.rect.y + self.image.get_height()]
-        # self.know3 = [self.rect.x + self.image.get_width(), self.rect.y]
-        # self.know4 = [self.rect.x, self.rect.y + self.image.get_height()]
-
     def input_analisys(self):
         self.previous_pos[0] = self.left_sensor[0]
         self.previous_pos[1] = self.left_sensor[1]
@@ -157,7 +147,6 @@ class Car(pygame.sprite.Sprite):
         self.rect.x -= 1000
 
     def accelleration(self, time):
-
         velocity = MAX_VELOCITY * time / 40
         if velocity > MAX_VELOCITY:
             velocity = MAX_VELOCITY
@@ -198,21 +187,11 @@ class Car(pygame.sprite.Sprite):
         x_r = int(self.right_sensor[0])
         y_r = int(self.right_sensor[1])
         # print(x_r,x_l)
-        if (x_l < 50 or x_l < 50 or y_l < 10 or y_r < 10 or y_l > (SCREEN_HEIGHT - 15) or y_r > (
+
+        if (x_l < 50 or y_l < 10 or y_r < 10 or y_l > (SCREEN_HEIGHT - 15) or y_r > (
                 SCREEN_HEIGHT - 15) or self.SCREEN.get_at((x_l, y_l)) == GREEN or self.SCREEN.get_at(
             (x_r, y_r)) == GREEN):
-
-            # print((self.left_sensor[0], self.left_sensor[1]))
-            # if (x_l < 50 or x_l < 50 or y_l < 10 or y_r < 10 or y_l > (SCREEN_HEIGHT - 15) or y_r > (
-            #         SCREEN_HEIGHT - 15)):
-            #     print("BOUNDARIES")
-            #
-
-            if (self.SCREEN.get_at((x_l, y_l)) == GREEN or self.SCREEN.get_at(
-                    (x_r, y_r)) == GREEN):
-                # print("COLLISION")
-
-                return True
+            return True
 
         if self.x_velocity == 0 and self.y_velocity == 0:
             self.still += 1
@@ -225,19 +204,12 @@ class Car(pygame.sprite.Sprite):
             return True
         return False
 
-    # def detect_finishline(self):
-    #     if(self.left_sensor[0] <= 485 and self.left_sensor[0] >= 470 and self.left_sensor[1] >= 600 and self.left_sensor[1] < 900):
-    #         return True
-    #     else:
-    #         return False
-
     def update(self):
 
         self.draw_sensors()
         self.input_analisys()
         self.move()
-        # self.crashed = self.detect_collision()
-        # self.finish_line = self.detect_finishline()
+
         self.radars.clear()
         angles = [-60, -30, 0, 30, 60]
         for i in range(len(angles)):
@@ -247,9 +219,6 @@ class Car(pygame.sprite.Sprite):
         input = [0, 0, 0, 0, 0, 0]
         for i, radar in enumerate(self.radars):
             input[i] = int(radar[1])
-        # if ((self.traf_l_pos - self.left_sensor[0]) < 200) and ((self.traf_l_pos - self.left_sensor[0]) > 0):
-        #     input[5] = 1
-        # else:
 
         input[5] = 0
         if input[5] == 1:
