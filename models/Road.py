@@ -2,19 +2,14 @@ import pygame
 import os
 import random
 from models.statics import (
-     TRACK_WIDTH,
-     GREEN
+    TRACK_WIDTH, SCREEN_HEIGHT, GREEN
 )
 
-SCREEN_WIDTH = 1500
-SCREEN_HEIGHT = 700
-
-SCREEN = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
 class Road:
-    def __init__(self):
+    def __init__(self, SCREEN):
         self.points = [(0, SCREEN_HEIGHT / 2)]  # 0
-        # self.SCREEN = SCREEN
+        self.SCREEN = SCREEN
 
     def addpoint(self):
         points_length = len(self.points) - 1
@@ -38,14 +33,13 @@ class Road:
 
     def draw(self, i):
         if i > 0:
-            pygame.draw.line(SCREEN, GREEN,
+            pygame.draw.line(self.SCREEN, GREEN,
                              (self.points[i - 1][0], self.points[i - 1][1] + TRACK_WIDTH),
                              (self.points[i][0], self.points[i][1] + TRACK_WIDTH), 22)
 
-            pygame.draw.line(SCREEN, GREEN,
+            pygame.draw.line(self.SCREEN, GREEN,
                              (self.points[i - 1][0], self.points[i - 1][1] - TRACK_WIDTH),
                              (self.points[i][0], self.points[i][1] - TRACK_WIDTH), 22)
-
 
     def shift(self):
         for h in range(5):

@@ -20,10 +20,9 @@ def remove(index):
     nets.pop(index)
 
 
-def eval_genomes(genomes, config):
+def fittness_function(genomes, config):
     clock = pygame.time.Clock()
 
-    fit = 1
     global cars, ge, nets, shifts
     global generation_count
 
@@ -36,9 +35,8 @@ def eval_genomes(genomes, config):
     nets = []
     SCREEN.fill(GRAY)
 
-    trak = Road.Road()
+    trak = Road.Road(SCREEN=SCREEN)
 
-    check = 0
     next_lane = False
     for i in range(15):
         trak.addpoint()
@@ -59,7 +57,7 @@ def eval_genomes(genomes, config):
     # file = open("winner.p",'rb')
     # winner_genome = pickle.load(file)
     # file.close()
-
+    #
     # cars.append(pygame.sprite.GroupSingle(Car(SCREEN)))
     # ge.append(winner_genome[1])
     # net = neat.nn.FeedForwardNetwork.create(winner_genome[1], config)
@@ -95,11 +93,11 @@ def eval_genomes(genomes, config):
                 pygame.quit()
                 sys.exit()
 
-        if len(cars) == 1:
-            # print(ge[0].fitness)
-            with open("Winner.p", "wb") as f:
-                pickle.dump(genomes[0], f)
-                f.close()
+        # if len(cars) == 1:
+        #     # print(ge[0].fitness)
+        #     with open("Winner.p", "wb") as f:
+        #         pickle.dump(genomes[0], f)
+        #         f.close()
 
         if len(cars) == 0:
             SCORES.append(shifts)
@@ -109,9 +107,6 @@ def eval_genomes(genomes, config):
 
         for i, car in enumerate(cars):
 
-            # if car.sprite.x_velocity > 1:
-            #     ge[i].fitness += fit
-            #
             if car.sprite.crashed:
                 remove(i)
 

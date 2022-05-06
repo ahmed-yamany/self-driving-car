@@ -1,5 +1,5 @@
 import neat
-from models.main_algorithem import eval_genomes
+from models.main_algorithem import fittness_function
 
 if __name__ == '__main__':
     configurations_path = '/Users/ahmedyamany/PycharmProjects/self-driving-car/models/config.txt'
@@ -18,4 +18,7 @@ if __name__ == '__main__':
     stats = neat.StatisticsReporter()
     Population.add_reporter(stats)
 
-    Population.run(eval_genomes, 50)
+    winner = Population.run(fittness_function, 300)
+
+    print('\nBest genome:\n{!s}'.format(winner))
+
