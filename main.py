@@ -22,3 +22,4 @@ if __name__ == '__main__':
 
     print('\nBest genome:\n{!s}'.format(winner))
 
+

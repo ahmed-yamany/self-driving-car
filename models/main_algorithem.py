@@ -4,7 +4,7 @@ import sys
 from models import Road
 from models.car import Car
 from models.statics import (
-    SCREEN, SPEED, SCORES, GRAY
+    SCREEN, SPEED, SCORES, GRAY, GREEN
 )
 import neat
 
@@ -33,7 +33,6 @@ def fittness_function(genomes, config):
     cars = []
     ge = []
     nets = []
-    SCREEN.fill(GRAY)
 
     trak = Road.Road(SCREEN=SCREEN)
 
@@ -86,7 +85,7 @@ def fittness_function(genomes, config):
     while True:
         time += 1
 
-        SCREEN.fill(GRAY)
+        SCREEN.fill(GREEN)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

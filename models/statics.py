@@ -4,7 +4,7 @@ import os
 SCREEN_WIDTH = 1400
 SCREEN_HEIGHT = 700
 
-TRACK_WIDTH = 80
+TRACK_WIDTH = 100
 
 SPEED = 50
 
@@ -12,6 +12,7 @@ RED = (200, 0, 0)
 FUCSIA = (255, 0, 255)
 YELLOW = pygame.Color(30, 30, 30)
 GRAY = pygame.Color(170, 170, 170)
+
 WHITE = pygame.Color(255, 255, 255, 255)
 GREEN = pygame.Color(2, 105, 31, 255)
 
