@@ -14,7 +14,7 @@ YELLOW = pygame.Color(30, 30, 30)
 GRAY = pygame.Color(170, 170, 170)
 
 WHITE = pygame.Color(255, 255, 255, 255)
-GREEN = pygame.Color(2, 105, 31, 255)
+GREEN = pygame.Color(2, 105, 80, 255)
 
 air_density = 1.225
 friction_coef = 1.7
@@ -34,6 +34,6 @@ SCREEN = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
 
 CAR = pygame.image.load(
-    os.path.join("/Users/ahmedyamany/PycharmProjects/self-driving-car/imgs", "carf.png"))
+    os.path.join("/Users/ahmedyamany/PycharmProjects/self-driving-car/imgs", "car5.png"))
 
 CAR = pygame.transform.scale(CAR, (54, 37))  # change car size by the distinations

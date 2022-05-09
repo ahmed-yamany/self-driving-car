@@ -35,7 +35,6 @@ def fittness_function(genomes, config):
     nets = []
 
     trak = Road.Road(SCREEN=SCREEN)
-
     next_lane = False
     for i in range(15):
         trak.addpoint()
